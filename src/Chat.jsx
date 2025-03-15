@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import './CSS/Chat.css';
 
 // get the API key from the environment
-const APIKEY = import.meta.env.API_KEY;
+const APIKEY = import.meta.env.VITE_DEEPSEEK_API_KEY;
 
 // q: how do i save the api key?
 // a: you can use import.meta.env.OPENAI_API_KEY to access the API key
