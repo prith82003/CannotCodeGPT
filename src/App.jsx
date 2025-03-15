@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './CSS/App.css'
+import Chat from './Chat'
 
 function App() {
   const [count, setCount] = useState(0)
+  const chatAssistantRef = useRef(null)
+
+  // after 5 seconds, call notifySpending with a message
+  // setTimeout(() => {
+  //   chatAssistantRef.current.sendProgrammaticMessage('PURCHASE:$10.00;REASON:Food')
+  // }, 5000)
 
   return (
     <>
@@ -28,6 +35,8 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      <Chat ref={chatAssistantRef} />
     </>
   )
 }
