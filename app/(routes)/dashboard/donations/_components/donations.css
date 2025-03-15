@@ -1,0 +1,54 @@
+.typing-placeholder::placeholder {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.charity {
+  margin: 1rem 0 1rem 0;
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
+.charity:hover {
+  background: linear-gradient(to right, #f7a1b4, #fee9e8);
+  color: black;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.info-button {
+  background-color: white;
+  color: #ec4899;
+  border-color: #ec4899;
+}
+
+.info-button:hover {
+  background-color: #ec4899;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.donate-button {
+  background-color: #ec4899;
+  color: white;
+  border-color: #ec4899;
+}
+
+.donate-button:hover {
+  background-color: white;
+  color: #ec4899;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.95);
+}

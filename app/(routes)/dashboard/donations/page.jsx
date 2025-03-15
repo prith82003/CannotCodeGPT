@@ -1,10 +1,24 @@
 "use client";
 import React from "react";
 import Chat from "../Chatbot/Chat";
-import { charityList } from "./organisations";
+import { charityList } from "./_components/organisations";
+import "./_components/donations.css";
 
-function donations() {
+function Donations() {
   const [search, setSearch] = React.useState("");
+  const [placeholder, setPlaceholder] = React.useState("");
+  const searchPlaceholder = "Find your crew... and drop the cash on what's worth!";
+  const [letter, setLetter] = React.useState(0);
+
+  React.useEffect(() => {
+    if (letter < searchPlaceholder.length) {
+      const typingInterval = setTimeout(() => {
+        setPlaceholder(searchPlaceholder.slice(0, letter + 1));
+        setLetter(letter + 1);
+      }, 100);
+      return () => clearTimeout(typingInterval);
+    }
+  }, [letter]);
 
   const listCharities = charityList
     .filter((charity) => charity.name.toLowerCase().includes(search.toLowerCase()))
@@ -22,8 +36,8 @@ function donations() {
           <div className="my-4">
             <input
               type="text"
-              placeholder="Search organisations"
-              className="p-2 bg-white text-black border border-gray-300 rounded-md w-full"
+              placeholder={placeholder}
+              className="p-2 bg-white text-black border border-gray-300 rounded-md w-full typing-placeholder"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -37,21 +51,15 @@ function donations() {
           */}
           <div className="max-h-96 overflow-y-auto">
             {listCharities.map((charity, i) => (
-              <div key={i} className="m-4 ml-0 p-4 border rounded-md">
+              <div key={i} className="charity">
                 <h1 className="font-bold text-xl">{charity.name}</h1>
                 <p className="my-2">{charity.description}</p>
                 <div className="flex space-x-4">
-                  <button
-                    onClick={() => handleInformation(charity)}
-                    className="bg-white text-pink-400 p-2 px-4 border solid rounded-md"
-                  >
-                    More Information
+                  <button onClick={() => handleInformation(charity)} className="button info-button">
+                    👀 Check It Out for More Information
                   </button>
-                  <button
-                    onClick={() => handleDonate(charity)}
-                    className="bg-pink-400 text-white py-2 px-4 border solid rounded-md"
-                  >
-                    Donate
+                  <button onClick={() => handleDonate(charity)} className="button donate-button">
+                    💸 Drop Some Love and Donate
                   </button>
                 </div>
               </div>
@@ -64,4 +72,4 @@ function donations() {
   );
 }
 
-export default donations;
+export default Donations;
