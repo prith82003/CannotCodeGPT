@@ -1,15 +1,12 @@
-"use client"
-import { useState } from 'react'
+"use client";
+import { useState } from "react";
 import GamblingTab from "./_components/GamblingTab";
-import './Gambling.css'
+import "./gambling.css";
 
 function Gambling() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-  return (
-    <GamblingTab />
-
-  )
+  return <GamblingTab />;
 }
 
-export default Gambling
+export default Gambling;

@@ -12,6 +12,15 @@ function donations() {
         <h2 className="font-bold text-3xl">Donations</h2>
         <div>
           {/* create a search bar */}
+          <div className="my-4">
+            <input
+              type="text"
+              placeholder="Search organisations"
+              className="p-2 bg-white text-black border border-gray-300 rounded-md w-full"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
 
           {/*
           list of charities and organisations with the following information in a coloumn:
