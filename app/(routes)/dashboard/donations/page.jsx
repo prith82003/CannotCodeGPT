@@ -6,6 +6,12 @@ import { charityList } from "./organisations";
 function donations() {
   const [search, setSearch] = React.useState("");
 
+  const listCharities = charityList
+    .filter((charity) => charity.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const handleDonate = (charity) => window.open(charity.url, "_blank");
+
   return (
     <>
       <div className="p-10">
@@ -28,6 +34,20 @@ function donations() {
             - description of organisation / charity
             - button to donate
           */}
+          <div className="max-h-96 overflow-y-auto">
+            {listCharities.map((charity, i) => (
+              <div key={i} className="m-4 ml-0 p-4 border rounded-md">
+                <h1 className="font-bold text-xl">{charity.name}</h1>
+                <p className="my-2">{charity.description}</p>
+                <button
+                  onClick={() => handleDonate(charity)}
+                  className="bg-pink-400 text-white py-2 px-4 border solid rounded-md"
+                >
+                  Donate
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Chat />
