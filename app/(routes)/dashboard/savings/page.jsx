@@ -42,12 +42,17 @@ function Savings() {
 
   const addSavingsGoal = async (e) => {
     e.preventDefault();
-    if (!goalName || !goalAmount) return;
+    if (!goalName || !goalAmount) {
+        console.log("Missing input: Goal Name or Amount is empty");
+        return;
+    }
+    console.log("Adding Savings Goal:", goalName, goalAmount);
     await db.insert(SavingsGoals).values({
       name: goalName,
       amount: parseFloat(goalAmount),
       createdBy: user?.primaryEmailAddress?.emailAddress,
     });
+    console.log("Goal successfully added!");
     setGoalName("");
     setGoalAmount("");
     fetchSavingsGoals();
