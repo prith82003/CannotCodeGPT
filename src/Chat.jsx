@@ -2,10 +2,19 @@ import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } f
 import OpenAI from 'openai';
 import './CSS/Chat.css';
 
+// get the API key from the environment
+const APIKEY = import.meta.env.API_KEY;
+
+// q: how do i save the api key?
+// a: you can use import.meta.env.OPENAI_API_KEY to access the API key
+
+// q: how do i save it to the environment?
+// a: you can use the .env file to save the API key
+
 const Chat = forwardRef((props, ref) => {
     const chatbot = new OpenAI({
         baseURL: 'https://api.deepseek.com',
-        apiKey: 'sk-ae370bd22ef64dcf98d3d62c0a2c6a4e',
+        apiKey: APIKEY,
         dangerouslyAllowBrowser: true
     });
 
