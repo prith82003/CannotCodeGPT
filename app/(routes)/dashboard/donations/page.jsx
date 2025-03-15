@@ -10,7 +10,8 @@ function donations() {
     .filter((charity) => charity.name.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const handleDonate = (charity) => window.open(charity.url, "_blank");
+  const handleInformation = (charity) => window.open(charity.infoURL, "_blank");
+  const handleDonate = (charity) => window.open(charity.donateURL, "_blank");
 
   return (
     <>
@@ -39,12 +40,20 @@ function donations() {
               <div key={i} className="m-4 ml-0 p-4 border rounded-md">
                 <h1 className="font-bold text-xl">{charity.name}</h1>
                 <p className="my-2">{charity.description}</p>
-                <button
-                  onClick={() => handleDonate(charity)}
-                  className="bg-pink-400 text-white py-2 px-4 border solid rounded-md"
-                >
-                  Donate
-                </button>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => handleInformation(charity)}
+                    className="bg-white text-pink-400 p-2 px-4 border solid rounded-md"
+                  >
+                    More Information
+                  </button>
+                  <button
+                    onClick={() => handleDonate(charity)}
+                    className="bg-pink-400 text-white py-2 px-4 border solid rounded-md"
+                  >
+                    Donate
+                  </button>
+                </div>
               </div>
             ))}
           </div>
