@@ -1,11 +1,10 @@
 import basiq from "./index.js"; // Import the SDK
 
+// Get an access token for Basiq API requests
 export const getAccessToken = async () => {
   try {
-    // Authenticate with your API key from .env.local
     basiq.auth(`Basic ${process.env.NEXT_PUBLIC_BASIQ_API_KEY}`);
 
-    // Get the access token
     const { data } = await basiq.postToken(
       { scope: "SERVER_ACCESS" },
       { "BASIQ-version": "3.0" }
@@ -13,58 +12,55 @@ export const getAccessToken = async () => {
 
     return data.access_token;
   } catch (error) {
-    console.error("Error fetching Basiq access token:", error);
+    console.error("❌ Error fetching Basiq access token:", error);
     throw error;
   }
 };
 
-export const createUser = async (email, mobile, firstName, lastName) => {
+// Create a Basiq user (linked to Clerk's user ID)
+export const createBasiqUser = async (clerkUserId, email) => {
   try {
-    // Get an access token
     const accessToken = await getAccessToken();
     basiq.auth(accessToken);
 
-    // Create user
     const { data } = await basiq.createUser({
       email,
-      mobile,
-      firstName,
-      lastName,
+      mobile: "+61412345678", // Placeholder mobile (Basiq requires it)
+      firstName: "Clerk",
+      lastName: "User",
     });
 
     return data;
   } catch (error) {
-    console.error("Error creating user:", error);
+    console.error("❌ Error creating Basiq user:", error);
     throw error;
   }
 };
 
-export const getUserAccounts = async (userId) => {
+// Get user accounts from Basiq
+export const getUserAccounts = async (basiqUserId) => {
   try {
-    // Get an access token
     const accessToken = await getAccessToken();
     basiq.auth(accessToken);
 
-    // Fetch user accounts
-    const { data } = await basiq.getUserAccounts({ id: userId });
+    const { data } = await basiq.getUserAccounts({ id: basiqUserId });
     return data;
   } catch (error) {
-    console.error("Error fetching user accounts:", error);
+    console.error("❌ Error fetching user accounts:", error);
     throw error;
   }
 };
 
-export const getUserTransactions = async (userId) => {
+// Get user transactions from Basiq
+export const getUserTransactions = async (basiqUserId) => {
   try {
-    // Get an access token
     const accessToken = await getAccessToken();
     basiq.auth(accessToken);
 
-    // Fetch user transactions
-    const { data } = await basiq.getUserTransactions({ id: userId });
+    const { data } = await basiq.getUserTransactions({ id: basiqUserId });
     return data;
   } catch (error) {
-    console.error("Error fetching transactions:", error);
+    console.error("❌ Error fetching transactions:", error);
     throw error;
   }
 };
