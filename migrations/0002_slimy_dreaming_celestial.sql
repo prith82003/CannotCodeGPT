@@ -1,0 +1,1 @@
+ALTER TABLE "savings_goals" ADD COLUMN "icon" varchar;

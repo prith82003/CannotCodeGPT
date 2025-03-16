@@ -20,5 +20,7 @@ export const SavingsGoals = pgTable("savings_goals", {
   id: serial("id").primaryKey(),
   name: varchar("name").notNull(),
   amount: numeric("amount").notNull(),
+  icon: varchar("icon"),
+  savedAmount: integer("saved_amount").default(0),
   createdBy: varchar("created_by").notNull(),
 });
