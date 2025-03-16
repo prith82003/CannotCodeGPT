@@ -1,5 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
-import { CoinsIcon, LayoutGrid, PiggyBank, ReceiptText, Bitcoin} from "lucide-react";
+import { CoinsIcon, LayoutGrid, PiggyBank, ReceiptText, Bitcoin, HandCoins} from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
@@ -36,6 +36,12 @@ function SideNav() {
       name: "Gambling",
       icon: Bitcoin,
       path: "/dashboard/gambling",
+    },
+    {
+      id: 6,
+      name: "Savings",
+      icon: HandCoins,
+      path: "/dashboard/savings"
     }
   ];
   const path = usePathname();
