@@ -8,7 +8,7 @@ First, run the backend server:
 node server.js
 ```
 
-Then, run the development server:
+Then, run the development server in another terminal:
 
 ```bash
 npm run dev
