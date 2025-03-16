@@ -176,9 +176,6 @@ function Savings() {
       onClick={() => addSavings(goal.id)}>
       Add Savings
     </Button>
-    <Button className="bg-red-500 text-white px-3 py-1 rounded-lg ml-4" onClick={() => deleteGoal(goal.id)}>
-      Delete Goal
-    </Button>
               </li>
             );
           })}
