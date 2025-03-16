@@ -1,7 +1,18 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
-const COLORS = ["#FFC989", "#f7c5bc", "#fda9c3", "#F49595", "F1CEBE"];
+const COLORS = [
+  "#FFB3BA",
+  "#FFDFBA",
+  "#FFD580",
+  "#BAFFC9",
+  "#BAE1FF",
+  "#D5AAFF",
+  "#FFC4E1",
+  "#A8E6CF",
+  "#D4A5A5",
+  "#F6C6EA"
+];
 
 const InvestmentAnalysis = ({ balance, investments, prices }) => {
   if (!prices) return <p>Loading investment data...</p>;
