@@ -3,12 +3,27 @@ import basiq from "./index.js"; // Import the SDK
 // Get an access token for Basiq API requests
 export const getAccessToken = async () => {
   try {
-    basiq.auth(`Basic ${process.env.NEXT_PUBLIC_BASIQ_API_KEY}`);
+    console.log("🔵 Fetching Basiq access token...");
 
-    const { data } = await basiq.postToken(
-      { scope: "SERVER_ACCESS" },
-      { "BASIQ-version": "3.0" }
-    );
+    const response = await fetch("https://au-api.basiq.io/token", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/x-www-form-urlencoded",
+        Authorization: process.env.NEXT_PUBLIC_BASIQ_API_KEY, // API Key from .env
+        "basiq-version": "3.0",
+      },
+      body: new URLSearchParams({
+        scope: "SERVER_ACCESS",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`❌ Error ${response.status}: ${await response.text()}`);
+    }
+
+    const data = await response.json();
+    console.log("✅ Access Token:", data.access_token);
 
     return data.access_token;
   } catch (error) {
@@ -51,13 +66,32 @@ export const getUserAccounts = async (basiqUserId) => {
   }
 };
 
-// Get user transactions from Basiq
 export const getUserTransactions = async (basiqUserId) => {
   try {
     const accessToken = await getAccessToken();
     basiq.auth(accessToken);
 
-    const { data } = await basiq.getUserTransactions({ id: basiqUserId });
+    const url = `https://au-api.basiq.io/users/${basiqUserId}/transactions?limit=500`;
+    console.log("🔵 Fetching transactions from:", url);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "basiq-version": "3.0",
+      },
+    });
+
+    console.log("🔵 Raw Response:", response);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`❌ Error ${response.status}: ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log("✅ Transactions Data:", data);
     return data;
   } catch (error) {
     console.error("❌ Error fetching transactions:", error);

@@ -1,16 +1,20 @@
-import { auth } from "@clerk/nextjs/server"; // Clerk authentication
+import { getAuth } from "@clerk/nextjs/server";
 import { createBasiqUser } from "@/.api/apis/basiq/basiq.js";
 
 export async function POST(req) {
   try {
-    const { userId, user } = auth(); // Get the logged-in user's ID from Clerk
+    const { userId } = getAuth(req); // ✅ Correct way to get Clerk userId in API routes
 
     if (!userId) {
+      console.error("❌ No Clerk User ID found!");
       return Response.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
-    // Create or fetch Basiq user
-    const basiqUser = await createBasiqUser(userId, user?.emailAddresses[0]?.emailAddress);
+    console.log("✅ Clerk User ID:", userId);
+
+    // Create a Basiq user using Clerk's user ID
+    const basiqUser = await createBasiqUser(userId, `${userId}@example.com`);
+    console.log("✅ Basiq User Created:", basiqUser);
 
     return Response.json({ success: true, basiqUserId: basiqUser.id });
   } catch (error) {
@@ -18,4 +22,3 @@ export async function POST(req) {
     return Response.json({ success: false, error: error.message }, { status: 500 });
   }
 }
-

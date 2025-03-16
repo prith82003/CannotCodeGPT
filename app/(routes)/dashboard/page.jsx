@@ -78,16 +78,26 @@ function Dashboard() {
    */
   const fetchTransactions = async () => {
     setLoading(true);
-    const response = await fetch("/api/basiq/transactions");
-    const data = await response.json();
-
-    if (data.success) {
-      setTransactions(data.transactions);
+    console.log("🔵 Fetching transactions...");
+  
+    try {
+      const response = await fetch("/api/basiq/transactions");
+      const data = await response.json();
+  
+      console.log("🟢 API Response:", data);
+  
+      if (data.success && data.transactions.length > 0) {
+        setTransactions(data.transactions);
+      } else {
+        console.warn("⚠️ No transactions found.");
+        setTransactions([]); // Show "No Transactions Found"
+      }
+    } catch (error) {
+      console.error("❌ Fetch Error:", error);
     }
-
+  
     setLoading(false);
   };
-
   /**
    * Handle bank connection with Basiq
    */
