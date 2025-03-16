@@ -168,7 +168,9 @@ function Savings() {
       {Math.min(progressPercentage, 100)}%
     </span>
   </div>
-  {/* Add Savings Button */}
+  <Button className="bg-red-500 text-white px-3 py-1 rounded-lg ml-4" onClick={() => deleteGoal(goal.id)}>
+      Delete Goal
+    </Button>
     <Button
       className="bg-primary text-white px-3 py-1 rounded-lg"
       onClick={() => addSavings(goal.id)}>
