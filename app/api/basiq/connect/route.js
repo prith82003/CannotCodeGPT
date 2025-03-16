@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server"; // Clerk authentication
-import { createBasiqUser } from "@/app/api/apis/basiq/basiq.js";
+import { createBasiqUser } from "@/.api/apis/basiq/basiq.js";
 
 export async function POST(req) {
   try {
