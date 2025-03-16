@@ -157,10 +157,11 @@ const Chat = forwardRef((props, ref) => {
         style={{
           width: isOpen ? "50px" : "110px",
           height: isOpen ? "50px" : "110px",
-          fontSize: isOpen ? "25px" : "45px",
+          fontSize: isOpen ? "25px" : "55px",
+          transform: isOpen ? "none" : "scaleX(-1)",
         }}
       >
-        {isOpen ? "✕" : "💬"}
+        {isOpen ? "✕" : "🗣"}
       </button>
       {isOpen && (
         <div className="chat-window">
